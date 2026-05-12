@@ -15,3 +15,7 @@ It basically means that the publisher is connecting to the exact same RabbitMQ m
 ![Processes](SendingProcesses.png)
 This screenshot demonstrates the asynchronous decoupling provided by the message broker. On the right, the Publisher is executed multiple times in rapid succession, instantly firing off batches of events to RabbitMQ and completing its process. On the left, the single 'slow' Subscriber continuously works through the resulting backlog of messages at its own pace (with a 1-second delay). The system remains stable because RabbitMQ safely buffers all incoming events in the queue, ensuring no data is lost even when the producer vastly outpaces the consumer.
 
+### Spike Monitor
+![Spike 1](Spike.png)
+![Spike 2](Spike2.png)
+The spike in the RabbitMQ 'Message rates' chart demonstrates the message broker acting as a buffer between an asynchronous publisher and subscriber. Because the Publisher sent all 5 UserCreatedEventMessage events almost instantly, but the Subscriber was artificially delayed (thread::sleep for 1 second per message) to simulate a slow worker, the messages could not be processed immediately. RabbitMQ temporarily stored these unacknowledged messages in its queue, basically causing the visible spike in the graph—and then steadily fed them to the Subscriber one by one until the queue was empty
