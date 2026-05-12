@@ -19,3 +19,8 @@ This screenshot demonstrates the asynchronous decoupling provided by the message
 ![Spike 1](Spike.png)
 ![Spike 2](Spike2.png)
 The spike in the RabbitMQ 'Message rates' chart demonstrates the message broker acting as a buffer between an asynchronous publisher and subscriber. Because the Publisher sent all 5 UserCreatedEventMessage events almost instantly, but the Subscriber was artificially delayed (thread::sleep for 1 second per message) to simulate a slow worker, the messages could not be processed immediately. RabbitMQ temporarily stored these unacknowledged messages in its queue, basically causing the visible spike in the graph—and then steadily fed them to the Subscriber one by one until the queue was empty
+
+### Multiple Subscriber
+![Terminal](Multiple.png)
+![RabbitMQ](MultipleRabbitMQ.png)
+When scaling up by running multiple subscriber instances simultaneously, the queue was processed much faster. RabbitMQ distributed the workload across the available subscribers using a round-robin approach, preventing a bottleneck.
