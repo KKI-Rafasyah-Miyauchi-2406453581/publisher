@@ -23,4 +23,4 @@ The spike in the RabbitMQ 'Message rates' chart demonstrates the message broker 
 ### Multiple Subscriber
 ![Terminal](Multiple.png)
 ![RabbitMQ](MultipleRabbitMQ.png)
-When scaling up by running multiple subscriber instances simultaneously, the queue was processed much faster. RabbitMQ distributed the workload across the available subscribers using a round-robin approach, preventing a bottleneck.
+When scaling up by running multiple subscriber instances simultaneously, the queue was processed much faster. I think this happens because RabbitMQ distributed the workload across the available subscribers using a round-robin approach, which prevents a bottleneck.
