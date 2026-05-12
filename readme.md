@@ -5,3 +5,7 @@ In this case, the publisher program will send 5 individual data events (UserCrea
 
 **b. The url of: "amqp://guest:guest@localhost:5672" is the same as in the subscriber program, what does it mean?**
 It basically means that the publisher is connecting to the exact same RabbitMQ message broker instance running locally on port 5672. This is required because both the publisher and subscriber need to be communicating with the identical broker to send and receive the shared events.
+
+
+### RabbitMQ Dashboard
+![RabbitMQ Dashboard](RabbitMQ.png)
