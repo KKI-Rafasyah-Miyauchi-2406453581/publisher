@@ -9,3 +9,9 @@ It basically means that the publisher is connecting to the exact same RabbitMQ m
 
 ### RabbitMQ Dashboard
 ![RabbitMQ Dashboard](RabbitMQ.png)
+
+
+### Sending and processing event
+![Processes](SendingProcesses.png)
+This screenshot demonstrates the asynchronous decoupling provided by the message broker. On the right, the Publisher is executed multiple times in rapid succession, instantly firing off batches of events to RabbitMQ and completing its process. On the left, the single 'slow' Subscriber continuously works through the resulting backlog of messages at its own pace (with a 1-second delay). The system remains stable because RabbitMQ safely buffers all incoming events in the queue, ensuring no data is lost even when the producer vastly outpaces the consumer.
+
